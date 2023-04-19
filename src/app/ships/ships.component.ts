@@ -15,9 +15,11 @@ export class ShipsComponent implements OnInit {
   fetchShips() {
     this.api.fetchShips().subscribe({
       next: (data:any) => {
-        // this.ships = data
-        console.log(data);
-        
+        data.forEach((record:any) => {
+          record.trailer == 0 ? record.trailer = "nem" : record.trailer = "igen"
+        });
+
+        this.ships = data
       },
       error: (erro:any) => {
         console.log(erro);
@@ -39,11 +41,8 @@ export class ShipsComponent implements OnInit {
     })
   }
 
-  updateShip() {
-
-    let ship:any = []
-
-    this.api.updateShip(ship).subscribe({
+  updateShip(id:number) {
+    this.api.updateShip(id).subscribe({
       next: (data:any) => {
 
       },

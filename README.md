@@ -4,5 +4,5 @@ szakmai vizsga webalkalmazás minta
 
 # Stack
 
-- Angular
-- Bootstrap
+- Angular (ReactiveFormsModule, HttpClientModule)
+- Bootstrap (nav, table)
