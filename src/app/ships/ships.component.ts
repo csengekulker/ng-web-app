@@ -21,9 +21,7 @@ export class ShipsComponent implements OnInit {
 
         this.ships = data
       },
-      error: (erro:any) => {
-        console.log(erro);
-      }
+      error: (erro:any) => console.log(erro)
     })
   }
 
@@ -35,31 +33,27 @@ export class ShipsComponent implements OnInit {
       next: (data:any) => {
 
       },
-      error: (erro: any) => {
-        console.error(erro);
-      }
+      error: (erro: any) => console.error(erro)
     })
   }
+
+  startEdit(ship:any) {}
 
   updateShip(id:number) {
     this.api.updateShip(id).subscribe({
       next: (data:any) => {
 
       },
-      error: (erro: any) => {
-        console.error(erro);
-      }
+      error: (erro: any) => console.error(erro)
     })
   }
 
   deleteShip(id:number) {
     this.api.deleteShip(id).subscribe({
       next: (data:any) => {
-
+        console.log("törölve", data)
       },
-      error: (erro: any) => {
-        console.error(erro);
-      }
+      error: (erro: any) => console.error(erro)
     })
   }
 

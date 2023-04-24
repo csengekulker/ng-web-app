@@ -42,7 +42,7 @@ export class ApiService {
   }
 
   deleteShip(id: number) { 
-    let url = env.apihost + "destroy/" + id 
+    let url = env.apihost + "delete/" + id 
 
     return this.http.delete(url)
   }

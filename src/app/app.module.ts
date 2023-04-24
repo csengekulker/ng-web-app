@@ -7,12 +7,14 @@ import { ShipsComponent } from './ships/ships.component';
 import { MainComponent } from './main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalComponent } from './ships/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShipsComponent,
-    MainComponent
+    MainComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
