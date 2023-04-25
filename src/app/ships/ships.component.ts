@@ -11,7 +11,7 @@ export class ShipsComponent implements OnInit {
 
   constructor(private api: ApiService) { }
 
-  ships: any = []
+  ships: Ship[] = []
   adding = true
 
   id = new FormControl('')
@@ -29,13 +29,13 @@ export class ShipsComponent implements OnInit {
 
     console.log('mentés');
 
-    let ship = {
-      id: this.id.value,
+    let ship:Ship = {
+      id: Number(this.id.value),
       name: this.name.value,
-      length: this.length.value,
-      price: this.price.value,
-      person: this.person.value,
-      trailer: this.trailer.value
+      length: Number(this.length.value),
+      price: Number(this.price.value),
+      person: Number(this.person.value),
+      trailer: Boolean(this.trailer.value)
     }
 
     if (this.adding) {
@@ -85,7 +85,7 @@ export class ShipsComponent implements OnInit {
     })
   }
   // UPDATE
-  updateShip(ship:any) {
+  updateShip(ship:Ship) {
     this.api.updateShip(ship).subscribe({
       next: (data: any) => {
         console.log(data);
@@ -159,9 +159,9 @@ export class ShipsComponent implements OnInit {
 
 interface Ship {
   id: number,
-  name: string,
-  price: number,
+  name: string | null,
   length: number,
+  price: number,
   person: number,
   trailer: boolean
 }
