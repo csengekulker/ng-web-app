@@ -89,6 +89,7 @@ export class ShipsComponent implements OnInit {
     this.api.updateShip(ship).subscribe({
       next: (data: any) => {
         console.log(data);
+        this.fetchShips()
 
       },
       error: (e: any) => console.error(e)
@@ -98,7 +99,8 @@ export class ShipsComponent implements OnInit {
   deleteShip(id: number) {
     this.api.deleteShip(id).subscribe({
       next: (data: any) => {
-        console.log("törölve", data)
+        console.log("törölve")
+        this.fetchShips()
       },
       error: (e: any) => console.error(e)
     })
