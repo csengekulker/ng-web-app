@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../shared/api.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-ships',
@@ -11,6 +12,14 @@ export class ShipsComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ships:any = []
+  modalAdds=true
+
+  id = new FormControl('')
+  name = new FormControl('')
+  price = new FormControl('')
+  length = new FormControl('')
+  person = new FormControl('')
+  trailer = new FormControl('')
 
   fetchShips() {
     this.api.fetchShips().subscribe({
@@ -21,7 +30,7 @@ export class ShipsComponent implements OnInit {
 
         this.ships = data
       },
-      error: (erro:any) => console.log(erro)
+      error: (e:any) => console.log(e)
     })
   }
 
@@ -33,18 +42,35 @@ export class ShipsComponent implements OnInit {
       next: (data:any) => {
 
       },
-      error: (erro: any) => console.error(erro)
+      error: (e: any) => console.error(e)
     })
   }
 
-  startEdit(ship:any) {}
+  onClick() {
+    if (this.modalAdds) {
+      this.storeShip()
+    } else {
+      this.updateShip()
+    }
+  }
+
+  startAdd() {
+    this.modalAdds = true
+  }
+
+  startEdit(ship:any) {
+    this.modalAdds = false //modal edits
+
+    console.log(ship);
+    
+  }
 
   updateShip(id:number) {
     this.api.updateShip(id).subscribe({
       next: (data:any) => {
 
       },
-      error: (erro: any) => console.error(erro)
+      error: (e: any) => console.error(e)
     })
   }
 
@@ -53,7 +79,7 @@ export class ShipsComponent implements OnInit {
       next: (data:any) => {
         console.log("törölve", data)
       },
-      error: (erro: any) => console.error(erro)
+      error: (e: any) => console.error(e)
     })
   }
 
@@ -109,3 +135,11 @@ export class ShipsComponent implements OnInit {
 
 }
 
+interface Ship {
+  id: number,
+  name: string,
+  price: number,
+  length: number,
+  person: number, 
+  trailer: boolean
+}

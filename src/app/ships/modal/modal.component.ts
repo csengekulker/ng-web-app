@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ShipsComponent } from '../ships.component';
+import { ApiService } from 'src/app/shared/api.service';
 
 @Component({
   selector: 'app-modal',
@@ -9,23 +10,17 @@ import { ShipsComponent } from '../ships.component';
 })
 export class ModalComponent implements OnInit {
 
-  modalAdds=true
 
-  model!:Ship
 
-  constructor() { }
+  constructor(private api: ApiService) { }
+
+  onClick(event:any) {
+
+  }
 
   ngOnInit(): void { 
-    this.model.id
+    
   }
 
 }
 
-type Ship = {
-  id: number,
-  name: string,
-  price: number,
-  length: number,
-  person: number, 
-  trailer: boolean
-}
