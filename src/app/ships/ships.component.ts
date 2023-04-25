@@ -11,8 +11,8 @@ export class ShipsComponent implements OnInit {
 
   constructor(private api: ApiService) { }
 
-  ships:any = []
-  modalAdds=true
+  ships: any = []
+  adding = true
 
   id = new FormControl('')
   name = new FormControl('')
@@ -21,73 +21,93 @@ export class ShipsComponent implements OnInit {
   person = new FormControl('')
   trailer = new FormControl('')
 
+  onClose() {
+    this.adding = true
+  }
+
+  onSave() {
+
+    console.log('mentés');
+
+    let ship = {
+      id: this.id.value,
+      name: this.name.value,
+      length: this.length.value,
+      price: this.price.value,
+      person: this.person.value,
+      trailer: this.trailer.value
+    }
+
+    if (this.adding) {
+      this.storeShip(ship)
+    } else {
+      this.updateShip(ship)
+      this.adding = true
+    }
+
+  }
+
+  startAdd() {
+    console.log('hozzáadás')
+    this.adding = true
+  }
+
+  startEdit(ship: any) {
+    console.log('szerkesztés');
+
+    this.adding = false //modal edits
+
+    this.id.setValue(ship.id)
+    this.name.setValue(ship.name)
+    this.length.setValue(ship.length)
+    this.price.setValue(ship.price)
+    this.person.setValue(ship.person)
+    this.trailer.setValue(ship.trailer)
+  }
+
+  // CREATE
+  storeShip(ship: any) {
+    this.api.storeShip(ship).subscribe({
+      next: (data: any) => console.log(data)
+    })
+  }
+  // READ
   fetchShips() {
     this.api.fetchShips().subscribe({
-      next: (data:any) => {
-        data.forEach((record:any) => {
+      next: (data: any) => {
+        data.forEach((record: any) => {
           record.trailer == 0 ? record.trailer = "nem" : record.trailer = "igen"
         });
 
         this.ships = data
       },
-      error: (e:any) => console.log(e)
+      error: (e: any) => console.log(e)
     })
   }
-
-  storeShip() {
-
-    let ship:any = []
-
-    this.api.storeShip(ship).subscribe({
-      next: (data:any) => {
+  // UPDATE
+  updateShip(ship:any) {
+    this.api.updateShip(ship).subscribe({
+      next: (data: any) => {
+        console.log(data);
 
       },
       error: (e: any) => console.error(e)
     })
   }
-
-  onClick() {
-    if (this.modalAdds) {
-      this.storeShip()
-    } else {
-      this.updateShip()
-    }
-  }
-
-  startAdd() {
-    this.modalAdds = true
-  }
-
-  startEdit(ship:any) {
-    this.modalAdds = false //modal edits
-
-    console.log(ship);
-    
-  }
-
-  updateShip(id:number) {
-    this.api.updateShip(id).subscribe({
-      next: (data:any) => {
-
-      },
-      error: (e: any) => console.error(e)
-    })
-  }
-
-  deleteShip(id:number) {
+  // DELETE
+  deleteShip(id: number) {
     this.api.deleteShip(id).subscribe({
-      next: (data:any) => {
+      next: (data: any) => {
         console.log("törölve", data)
       },
       error: (e: any) => console.error(e)
     })
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.fetchShips()
   }
 
-  
   // ships = [
   //   {
   //     name: "túra csónak",
@@ -140,6 +160,6 @@ interface Ship {
   name: string,
   price: number,
   length: number,
-  person: number, 
+  person: number,
   trailer: boolean
 }

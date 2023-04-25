@@ -1,103 +1,83 @@
 <table class="table table-hover">
-    <thead>
-        <th>#</th>
-        <th>Név</th>
-        <th>Hossz</th>
-        <th>Ár</th>
-        <th>Hány személyes</th>
-        <th>Szállító</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let ship of ships">
-            <td>{{ship.id}}</td>
-            <td>{{ship.name}}</td>
-            <td>{{ship.length}}</td>
-            <td>{{ship.price}}</td>
-            <td>{{ship.person}}</td>
-            <td>{{ship.trailer}}</td>
-            <td>
-                <button
-                class="btn btn-primary" 
-                data-bs-toggle="modal" 
-                data-bs-target="#operatorModal"
-                (click)="startEdit(ship)"
-                class="btn btn-outline-warning">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-            </td>
-            <td>
-                <button 
-                (click)="deleteShip(ship.id)"
-                class="btn btn-outline-danger">
-                    <i class="bi bi-trash-fill"></i>
-                </button>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <th>#</th>
+    <th>Név</th>
+    <th>Hossz</th>
+    <th>Ár</th>
+    <th>Hány személyes</th>
+    <th>Szállító</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ship of ships">
+      <td>{{ship.id}}</td>
+      <td>{{ship.name}}</td>
+      <td>{{ship.length}}</td>
+      <td>{{ship.price}}</td>
+      <td>{{ship.person}}</td>
+      <td>{{ship.trailer}}</td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#operatorModal" (click)="startEdit(ship)"
+          class="btn btn-outline-warning">
+          <i class="bi bi-pen-fill"></i>
+        </button>
+      </td>
+      <td>
+        <button (click)="deleteShip(ship.id)" class="btn btn-outline-danger">
+          <i class="bi bi-trash-fill"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- Button trigger modal -->
-<button (click)="startAdd()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#operatorModal">
-    Hozzáadás
-  </button>
+<button (click)="startAdd()" type="button" class="btn btn-primary" data-bs-toggle="modal"
+  data-bs-target="#operatorModal">
+  Hozzáadás
+</button>
 
-  <div class="modal fade" id="operatorModal" tabindex="-1" aria-labelledby="operatorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="operatorModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+<div class="modal fade" id="operatorModal" tabindex="-1" aria-labelledby="operatorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="operatorModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
 
-                <div
-                class="mt-3" [ngClass]="modalAdds ? 'hidden' : 'disabled'">
-                    <label for="id" class="form-label">Id</label>
-                    <input class="form-control" type="text"
-                    [formControl]="id"
-                    >
-                </div>
-                <div
-                class="mt-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input class="form-control" type="text"
-                    [formControl]="name"
-                    >
-                </div>
-                <div
-                class="mt-3">
-                    <label for="length" class="form-label">Hossz</label>
-                    <input class="form-control" type="text"
-                    [formControl]="length"
-                    >
-                </div>
-                <div
-                class="mt-3">
-                    <label for="price" class="form-label">Ár</label>
-                    <input class="form-control" type="text"
-                    [formControl]="price"
-                    >
-                </div>
-                <div
-                class="mt-3">
-                    <label for="person" class="form-label">Hány személyes</label>
-                    <input class="form-control" type="text"
-                    [formControl]="person"
-                    >
-                </div>
-                <div
-                class="mt-3">
-                    <label class="form-label">Trailer</label>
-                    <input class="form-control" type="text"
-                    [formControl]="trailer"
-                    >
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="onClick($event)">Save changes</button>
-            </div>
+        <div class="mt-3">
+          <label for="id" class="form-label">Id</label>
+          <input class="form-control" type="text" [formControl]="id">
         </div>
+        <div class="mt-3">
+          <label for="name" class="form-label">Name</label>
+          <input class="form-control" type="text" [formControl]="name">
+        </div>
+        <div class="mt-3">
+          <label for="length" class="form-label">Hossz</label>
+          <input class="form-control" type="text" [formControl]="length">
+        </div>
+        <div class="mt-3">
+          <label for="price" class="form-label">Ár</label>
+          <input class="form-control" type="text" [formControl]="price">
+        </div>
+        <div class="mt-3">
+          <label for="person" class="form-label">Hány személyes</label>
+          <input class="form-control" type="text" [formControl]="person">
+        </div>
+        <div class="mt-3">
+          <label class="form-label">Trailer</label>
+          <select class="form-control" type="text" [formControl]="trailer">
+            <option value="0">nem</option>
+            <option value="1">igen</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Bezárás</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSave()">Mentés</button>
+      </div>
     </div>
+  </div>
 </div>

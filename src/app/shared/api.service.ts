@@ -28,8 +28,10 @@ export class ApiService {
     return this.http.post(url, body, httpOptions)
   }
 
-  updateShip(id: number) { 
-    let url = env.apihost + "update/" + id
+  updateShip(ship:any) {
+    console.log(ship.id);
+     
+    let url = env.apihost + "update/" + ship.id
 
     let headers = new HttpHeaders()
 
@@ -38,7 +40,7 @@ export class ApiService {
       headers: headers
     }
 
-    return this.http.put(url, httpOptions)
+    return this.http.put(url, ship, httpOptions)
   }
 
   deleteShip(id: number) { 
